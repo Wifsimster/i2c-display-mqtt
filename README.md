@@ -13,3 +13,5 @@ MQTT client displaying 3 values on a i2c 128x64 OLED display using U8G library
 3. Subscribe to a topic and update values on the display
 
 ## Scheme
+
+![scheme](https://github.com/Wifsimster/i2c-display-mqtt/blob/master/scheme.png)
