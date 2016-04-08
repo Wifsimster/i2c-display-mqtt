@@ -15,3 +15,5 @@ MQTT client displaying 3 values on a i2c 128x64 OLED display using U8G library
 ## Scheme
 
 ![scheme](https://github.com/Wifsimster/i2c-display-mqtt/blob/master/scheme.png)
+
+![scheme](https://github.com/Wifsimster/i2c-display-mqtt/blob/master/IMG_20160408_205334.jpg)
