@@ -1,6 +1,7 @@
 require('config')
 
 print("Setting up WIFI...")
+
 wifi.setmode(wifi.STATION)
 wifi.sta.config(AP,PWD)
 wifi.sta.connect()
