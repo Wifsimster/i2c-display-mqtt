@@ -1,14 +1,13 @@
 require('config')
 require('mqtt_function')
+local ntp = require('ntp')
 
-SCL = 3 -- GPIO_0
-SDA = 4 -- GPIO_2
-SLA = 0x3c
-TOPIC = "/sensors/bureau/#"
+TOPIC = "/sensors/"..LOCATION.."/#"
+
 m = nil
 
 -- Init i2c display
-i2c.setup(0, SDA, SCL, i2c.SLOW)
+i2c.setup(0, SDA_PIN, SCL_PIN, i2c.SLOW)
 disp = u8g.ssd1306_128x64_i2c(SLA)
 
 local function draw(temp, pres, lux)
@@ -29,6 +28,9 @@ end
 -- Init client with keepalive timer 120sec
 m = mqtt.Client(CLIENT_ID, 120, "", "")
 
+-- Sync to NTP server
+ntp.sync()
+
 m:on("message", function(conn,topic,payload)
     print(payload)
     if payload ~=nil then
@@ -39,10 +41,9 @@ m:on("message", function(conn,topic,payload)
         display(temp, pres, lux)
     end
 end)
-            
-print("Connecting to MQTT: "..BROKER_IP..":"..BROKER_PORT.."...")
 
-m:connect(BROKER_IP, BROKER_PORT, 0, function(conn)
+print("Connecting to MQTT: "..BROKER_IP..":"..BROKER_PORT.."...")
+m:connect(BROKER_IP, BROKER_PORT, 0, 1, function(conn)
     print("Connected to MQTT: "..BROKER_IP..":"..BROKER_PORT.." as "..CLIENT_ID)
     subscribe()
     -- Pings every 10 secs
