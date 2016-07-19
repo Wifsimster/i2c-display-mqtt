@@ -12,6 +12,3 @@ REFRESH_RATE = 30000 -- ms
 SCL_PIN = 3 -- GPIO_0
 SDA_PIN = 4 -- GPIO_2
 SLA = 0x3c
-
--- LOCATION
-LOCATION = "desktop"

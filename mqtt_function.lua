@@ -10,7 +10,8 @@ end
 
 -- Subscribe to the broker
 function subscribe()  
-    m:subscribe(TOPIC, 0, function(conn)
-        print("Successfully subscribed to the topic: "..TOPIC)
+    topic = "/sensors/#"
+    m:subscribe(topic, 0, function(conn)
+        print("Successfully subscribed to the topic: "..topic)
     end)
 end
